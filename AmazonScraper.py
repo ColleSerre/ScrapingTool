@@ -7,19 +7,6 @@ class page:
     def __init__(self, url):
         self.url = urlopen(url)
         self.bs = BS(self.url, 'html.parser')
-    def readFile(self): # Iterate through each line
-        File = open(self.path, 'rt')
-        for line in File:
-            self.url = line
-            if prompt == 1:
-                print(self.getprice())
-            elif prompt == 2:
-                print(self.getname())
-            elif prompt == 3:
-                print(self.getvendor())
-
-
-
     def getprice(self): ## NOT ELEGANT
         try:
             raw_price = self.bs.find('span', {'id':'price_inside_buybox'}).get_text()
@@ -51,9 +38,6 @@ class page:
                 raw_vendor = self.bs.find('a', {'class':'a-link-normal contributorNameID'}).get_text() # get author doesn't work
         return "Vendor: " + raw_vendor
    
-    
-url = input('Paste an Amazon URL: ') # add the sys module and a -c flag to get the config file
-Page = page(url)
 welcome="""
                 ----------------------------------------------------------
                 |                                                        |
@@ -73,8 +57,12 @@ welcome="""
                 ----------------------------------------------------------"""
 
 prompt=0
+choice = input("""{1}--Paste an Amazon URL
+{2}--Paste the path to a custom .txt file""") # add the sys module and a -c flag to get the config file
+url = input('Paste an Amazon URL')
 
 def actions():
+    Page = page(url)
     print(welcome)
     try:
         prompt = int(input('##'))
