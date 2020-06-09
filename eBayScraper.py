@@ -16,7 +16,7 @@ class ebayPage:
         raw_vendor = self.bs.find('span', {'class', 'mbg-nw'}).get_text()
         return raw_vendor
     def getVendorRating(self):
-        raw_rating = page.bs.find('div', {'id':'si-fb'}).get_text()
+        raw_rating = self.bs.find('div', {'id':'si-fb'}).get_text()
         pattern = re.compile('\\d+(?:\\.\\d+)?%')
         mo = pattern.search(raw_rating)
         return mo.group()
