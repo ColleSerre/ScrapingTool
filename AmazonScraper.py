@@ -3,7 +3,7 @@ from urllib.request import urlopen
 import sys
 import time
 
-class page:
+class Amazonpage:
     def __init__(self, url):
         self.url = urlopen(url)
         self.bs = BS(self.url, 'html.parser')
@@ -62,7 +62,7 @@ choice = input("""{1}--Paste an Amazon URL
 url = input('Paste an Amazon URL')
 
 def actions():
-    Page = page(url)
+    Page = Amazonpage(url)
     print(welcome)
     try:
         prompt = int(input('##'))
@@ -91,6 +91,3 @@ def actions():
 
 if __name__ == "__main__":
     actions()
-
-#To do:
-#   * Add for each line do method feature
