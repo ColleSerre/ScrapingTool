@@ -19,7 +19,5 @@ class ebayPage:
         raw_rating = page.bs.find('div', {'id':'si-fb'}).get_text()
         pattern = re.compile('\\d+(?:\\.\\d+)?%')
         mo = pattern.search(raw_rating)
-        print(mo.group())
+        return mo.group()
 
-url = input('enter url >> ')
-page = ebayPage(url)

@@ -1,7 +1,5 @@
 from bs4 import BeautifulSoup as BS
 from urllib.request import urlopen
-import sys
-import time
 
 class Amazonpage:
     def __init__(self, url):
@@ -38,56 +36,3 @@ class Amazonpage:
                 raw_vendor = self.bs.find('a', {'class':'a-link-normal contributorNameID'}).get_text() # get author doesn't work
         return "Vendor: " + raw_vendor
    
-welcome="""
-                ----------------------------------------------------------
-                |                                                        |
-                |                   Web Scraping API                     |
-                |                                                        |
-                |   Features:                                            |
-                |                                                        |
-                |      {1}--get price from Amazon pages                  |
-                |      {2}--get product name from Amazon pages           |
-                |      {3}--get vendor name from Amazon pages            |
-                |      {4}--EXECUTE ALL                                  |
-                |                                                        |
-                |   Features to come:                                    |
-                |                                                        |
-                |       * Enter a .txt file and get prices for each line |
-                |                                                        |
-                ----------------------------------------------------------"""
-
-prompt=0
-choice = input("""{1}--Paste an Amazon URL
-{2}--Paste the path to a custom .txt file""") # add the sys module and a -c flag to get the config file
-url = input('Paste an Amazon URL')
-
-def actions():
-    Page = Amazonpage(url)
-    print(welcome)
-    try:
-        prompt = int(input('##'))
-    except:
-        print('Invalid Input')
-        prompt = int(input('##'))
-        time.sleep(1)
-        actions()
-    if prompt == 1:
-        print(Page.getprice())
-        time.sleep(1)
-        actions()
-    elif prompt == 2:
-        print(Page.getname())
-        time.sleep(1)
-        actions()
-    elif prompt == 3:
-        print(Page.getvendor())
-        time.sleep(1)
-        actions()
-    elif prompt == 4:
-        print("""Product information:
-                    -""" + str(Page.getname())+"""
-                    -""" + str(Page.getprice())+"""
-                    -""" + str(Page.getvendor()))
-
-if __name__ == "__main__":
-    actions()
