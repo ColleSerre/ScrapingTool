@@ -3,7 +3,21 @@ import time
 import eBayScraper
 import AmazonScraper
 
-initalPrompt = """
+
+
+def countDown(n):
+    while True:
+        if n >= 0:
+            print("Wait " + str(n) + " seconds before making an new request")
+            n -= 1
+            time.sleep(1)
+        else:
+            break
+        
+
+
+
+initialPrompt = """
 Which website do you want to scrape?
     {1} - Amazon
     {2} - eBay
@@ -35,7 +49,7 @@ ebayPrompt = """
 
 
 while True:
-    website = int(input(initalPrompt))
+    website = int(input(initialPrompt))
 
     if website == 1:
         page = AmazonScraper.Amazonpage(input("Enter an Amazon URL >> "))
@@ -70,6 +84,7 @@ while True:
             {}
             {}        
             """.format(page.getPrice(), page.getName(), page.getVendor(), page.getVendorRating()))
+    countDown(10)
     
 
 

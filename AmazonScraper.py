@@ -1,5 +1,7 @@
 from bs4 import BeautifulSoup as BS
 from urllib.request import urlopen
+import requests
+
 
 class Amazonpage:
     def __init__(self, url):
@@ -18,7 +20,7 @@ class Amazonpage:
                     try:
                         raw_price = self.bs.find('span', {'class':'a-size-medium a-color-price offer-price a-text-normal'}).get_text()
                     except:
-                        print('fatal error')
+                        print('Unexpected Error')
         return "Price: " + raw_price.strip()
     def getname(self):
         try:
@@ -35,4 +37,9 @@ class Amazonpage:
             except:
                 raw_vendor = self.bs.find('a', {'class':'a-link-normal contributorNameID'}).get_text() # get author doesn't work
         return "Vendor: " + raw_vendor
-   
+    def searchamazon(self, argument):
+        argument = argument.replace(" ", "+")
+        self.url = urlopen("https://www.amazon.com/s?k="+ argument + "&ref=nb_sb_noss_2")
+        self.bs = BS(self.url, 'html.parser')
+        
+    
