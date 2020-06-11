@@ -39,7 +39,7 @@ class Amazonpage:
         return "Vendor: " + raw_vendor
     def searchamazon(self, argument):
         argument = argument.replace(" ", "+")
-        self.url = urlopen("https://www.amazon.com/s?k="+ argument + "&ref=nb_sb_noss_2")
+        self.url = urlopen("https://www.amazon.com/s?k=" + argument + "&crid=3IP1LTDR2K41D&sprefix=harry+p%2Caps%2C223&ref=nb_sb_ss_i_1_7")
         self.bs = BS(self.url, 'html.parser')
         
     
